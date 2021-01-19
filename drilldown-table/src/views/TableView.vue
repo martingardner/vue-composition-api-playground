@@ -1,4 +1,4 @@
-<template>
+<template>    
     <table>
         <thead>
             <tr>
@@ -6,7 +6,7 @@
             </tr>
         </thead>
         <tbody>
-            <tr v-for="data in tdata" :key="data.class">
+            <tr v-for="data in tdata" :key="data.class" @click="drilldownClick(data)">
                 {{ data.name }}
             </tr>
         </tbody>
@@ -18,14 +18,25 @@ import { reactive } from "vue";
 import tableData from '@/data/tableData';
 
 export default {
-        
-    setup(){
+    emits: [
+        "drilldownClick",
+        "drilldownData"
+    ],
+    setup(props, {emit}){
         const tdata = reactive(tableData);
 
+        function drilldownClick(data){
+            emit('drilldownClick', true);
+            emit('drilldownData', data);
+        }
+
         return {
-            tdata
+            tdata,
+            drilldownClick
         }
     }
+
+    
 }
 </script>
 
