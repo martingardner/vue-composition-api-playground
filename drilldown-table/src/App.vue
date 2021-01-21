@@ -10,6 +10,7 @@
 
 <script>
 import { ref  } from 'vue';
+import state from '@/state/index.js';
 import TableView from '@/views/TableView';
 import DrilldownView from '@/views/DrilldownView';
 
@@ -19,11 +20,10 @@ export default {
     DrilldownView
   },
   setup(){
-    let drilldown = ref(false);
     let drilldownSelected = ref();
 
     function changeDrilldown(bool){
-      drilldown.value = bool;
+      state.drilldown.value = bool;
     }
 
     function activeDrilldownData(data){
@@ -31,7 +31,7 @@ export default {
     }
   
     return {
-      drilldown,
+      drilldown: state.drilldown,
       drilldownSelected,
       changeDrilldown,
       activeDrilldownData
