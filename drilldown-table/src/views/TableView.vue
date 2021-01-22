@@ -6,8 +6,8 @@
             </tr>
         </thead>
         <tbody>
-            <tr v-for="data in TDATA" :key="data.class" @click="drilldownClick(data)">
-                {{ data.name }}
+            <tr v-for="data in TDATA" :key="data.class" @click="drilldownClick(data)" class="table-row">
+                <td>{{ data.name }}</td>
             </tr>
         </tbody>
     </table>
