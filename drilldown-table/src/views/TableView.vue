@@ -6,7 +6,7 @@
             </tr>
         </thead>
         <tbody>
-            <tr v-for="data in tdata" :key="data.class" @click="drilldownClick(data)">
+            <tr v-for="data in TDATA" :key="data.class" @click="drilldownClick(data)">
                 {{ data.name }}
             </tr>
         </tbody>
@@ -15,23 +15,22 @@
 
 <script>
 import { reactive } from "vue";
+import state from '@/state';
 import tableData from '@/data/tableData';
 
 export default {
-    emits: [
-        "drilldownClick",
-        "drilldownData"
-    ],
-    setup(props, {emit}){
-        const tdata = reactive(tableData);
+
+    setup(){
+        const TDATA = reactive(tableData);
+        const STATE = reactive(state);
 
         function drilldownClick(data){
-            emit('drilldownClick', true);
-            emit('drilldownData', data);
+            STATE.drilldown = true;
+            STATE.drilldownData.populateData(data);
         }
 
         return {
-            tdata,
+            TDATA,
             drilldownClick
         }
     }

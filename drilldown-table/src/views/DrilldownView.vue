@@ -1,33 +1,33 @@
 <template>
     <section>
         <h1>Drilldown View</h1>
-        <div>{{ classData }}</div>
+        
         <ul>
-            <li>name: {{classData.drilldownSelected.name}}</li>            
+            <li>name: {{classData.name}}</li>
+            <li>spells: {{ classData.spells }}</li>            
         </ul>
+        
         <button @click="backToTable">Back to Table</button>
     </section>
 </template>
 
 <script>
+import { reactive } from "vue";
+import state from '@/state';
+
 export default {
-    props: {
-        "classData" : Object
-    },
-    emits: [
-        "drilldownClick",
-        "drilldownData"
-    ],
-    setup(props, {emit}){
-        
+
+    setup(){        
+        const STATE = reactive(state);
 
         function backToTable(){
-            emit("drilldownClick", false);
-            emit("drilldownData", "");
+            STATE.drilldown = false;
+            STATE.drilldownData.resetData();
         }
 
         return {
-            backToTable
+            backToTable,
+            classData : STATE.drilldownData
         }
     }
     

@@ -1,15 +1,11 @@
 <template>  
   <main>
-    <span>drilldown value: {{ drilldown }}</span>
-    <br />
-    <span>drilldownSelected value: {{ drilldownSelected }}</span>
-    <table-view v-if="!drilldown" @drilldownClick="changeDrilldown" @drilldownData="activeDrilldownData" />
-    <drilldown-view v-if="drilldown" :classData={drilldownSelected} @drilldownClick="changeDrilldown" @drilldownData="activeDrilldownData" /> 
+    <table-view v-if="!drilldown"  />
+    <drilldown-view v-if="drilldown"  /> 
   </main> 
 </template>
 
 <script>
-import { ref  } from 'vue';
 import state from '@/state/index.js';
 import TableView from '@/views/TableView';
 import DrilldownView from '@/views/DrilldownView';
@@ -19,22 +15,9 @@ export default {
     TableView,
     DrilldownView
   },
-  setup(){
-    let drilldownSelected = ref();
-
-    function changeDrilldown(bool){
-      state.drilldown.value = bool;
-    }
-
-    function activeDrilldownData(data){
-      drilldownSelected.value = data;
-    }
-  
+  setup(){  
     return {
       drilldown: state.drilldown,
-      drilldownSelected,
-      changeDrilldown,
-      activeDrilldownData
     }
   }
 }
